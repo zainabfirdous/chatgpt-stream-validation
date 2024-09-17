@@ -2,7 +2,7 @@ import { fetchEventSource } from "@sameer-j/react-fetch-event-source";
 
 export const DONE_CHUNK = "[DONE]";
 
-let buffer = "";
+let buffer = ""; //global scope buffer variable to store json response streaming from server
 export const fetchAIData = async ({
   aiGenerationType,
   aiGeneratorInput,
@@ -27,13 +27,14 @@ export const fetchAIData = async ({
       onmessage(event) {
         if (event.data !== DONE_CHUNK) {
           const { chunkMessage } = JSON.parse(event?.data || "");
-          buffer += chunkMessage;
+          buffer += chunkMessage; 
+          //calls function to set job description state only when content property is receieved from server until we reach the end of content property.
           if (buffer.indexOf("content") !== -1 && buffer.indexOf("}") === -1) {
             dataUpdaterWithChunk({ chunk: chunkMessage });
           }
         } else {
           dataUpdaterWithChunk({ chunk: DONE_CHUNK });
-          buffer = "";
+          buffer = ""; //clear buffer for regeneration
           abortController.abort();
           //console.log("Not message:, closing connection"); // DND: This is needed for debugging in future.
         }

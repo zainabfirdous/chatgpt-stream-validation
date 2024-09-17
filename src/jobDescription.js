@@ -50,6 +50,10 @@ function JobDescription(props) {
   }, []);
 
   const updateJobDescWithChunk = ({ chunk }) => {
+    /*
+    the switch case will return to the fetch API without performing any action 
+    until actual content is recieved from server, once content starts streaming
+    we set jobdescription state by concatenating chunk to content received before this chunk*/
     switch (chunk) {
       case DONE_CHUNK:
         setIsJDGenerationComplete(true);
