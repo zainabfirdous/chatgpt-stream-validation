@@ -1,0 +1,27 @@
+#aigeneratebox {
+  border: solid 1px;
+  height: 500px;
+  width: 800px;
+  display: flex;
+  overflow-y: auto;
+  margin: auto;
+}
+
+#text {
+  text-align: justify;
+  padding: 10px;
+}
+
+#generate {
+  background: skyblue;
+  height: 40px;
+  width: 100px;
+  border: solid skyblue;
+  border-radius: 30px;
+  margin-bottom: 10px;
+}
+
+#container {
+  margin: 30px;
+  padding: auto;
+}
